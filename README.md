@@ -68,17 +68,17 @@ func main() {
     fmt.Println(ok)
 }
 ```
-# 三、生成```.cer```和```.pfx```证书
-#### 1、生成采用```des3```算法保护的私钥
+# 三、生成```.pfx```证书
 ```shell
-openssl genrsa -des3 -out private-rsa.key 1024
+openssl genrsa -out private_key.pem 2048
 ```
-#### 2、生成公钥证书
 ```shell
-openssl req -new -x509 -key private-rsa.key -days 3650 -out public-rsa.cer
+openssl req -new -key private_key.pem -out csr.csr
 ```
-#### 3、生成```PKCS12```格式```Keystore```
 ```shell
-openssl pkcs12 -export -name test-alias -in public-rsa.cer -inkey private-rsa.key -out user-rsa.pfx
+openssl x509 -req -days 3650 -in csr.csr -signkey private_key.pem -out certificate.pem
+```
+```shell
+openssl pkcs12 -export -out certificate.pfx -inkey private_key.pem -in certificate.pem -password pass:123456
 ```
 ![](./certs/generate-cert.png)
