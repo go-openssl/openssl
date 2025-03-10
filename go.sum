@@ -1,4 +1,4 @@
+github.com/go-openssl/pkcs12 v0.0.1 h1:HZujMIimXDBqZKAESVXnP40Rcd01CtW8Zg8kWANdM64=
+github.com/go-openssl/pkcs12 v0.0.1/go.mod h1:3842JI2q+yaI0edR9uQ6Zz2lfo/LEB8IBP5QgkzsR3A=
 golang.org/x/crypto v0.36.0 h1:AnAEvhDddvBdpY+uR+MyHmuZzzNqXSe/GvuDeob5L34=
 golang.org/x/crypto v0.36.0/go.mod h1:Y4J0ReaxCR1IMaabaSMugxJES1EpwhBHhv2bDHklZvc=
-software.sslmate.com/src/go-pkcs12 v0.5.0 h1:EC6R394xgENTpZ4RltKydeDUjtlM5drOYIG9c6TVj2M=
-software.sslmate.com/src/go-pkcs12 v0.5.0/go.mod h1:Qiz0EyvDRJjjxGyUQa2cCNZn/wMyzrRJ/qcDXOQazLI=

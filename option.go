@@ -6,7 +6,7 @@ import (
 	"crypto/x509"
 	"os"
 
-	"software.sslmate.com/src/go-pkcs12"
+	"github.com/go-openssl/pkcs12"
 )
 
 type Option func(*Openssl) error
