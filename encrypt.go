@@ -7,5 +7,5 @@ import (
 
 // Encrypt 公钥加密
 func (o *Openssl) Encrypt(data []byte) ([]byte, error) {
-	return rsa.EncryptOAEP(o.hash.New(), rand.Reader, o.publicKey, data, nil)
+	return rsa.EncryptPKCS1v15(rand.Reader, o.publicKey, data)
 }
