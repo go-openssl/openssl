@@ -15,7 +15,15 @@ func ParsePrivateKeyText(privateKeyText []byte) (*rsa.PrivateKey, error) {
 
 	priKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
-		return nil, err
+		if err.Error() == "x509: failed to parse private key (use ParsePKCS8PrivateKey instead for this key format)" {
+			var _priKey any
+			if _priKey, err = x509.ParsePKCS8PrivateKey(block.Bytes); err != nil {
+				return nil, err
+			}
+			priKey = _priKey.(*rsa.PrivateKey)
+		} else {
+			return nil, err
+		}
 	}
 
 	return priKey, nil
@@ -27,10 +35,18 @@ func ParsePublicKeyText(publicKeyText []byte) (*rsa.PublicKey, error) {
 		return nil, errors.New("公钥信息错误！")
 	}
 
-	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
+	pubKey, err := x509.ParsePKCS1PublicKey(block.Bytes)
 	if err != nil {
-		return nil, err
+		if err.Error() == "x509: failed to parse public key (use ParsePKIXPublicKey instead for this key format)" {
+			var _pubKey any
+			if _pubKey, err = x509.ParsePKIXPublicKey(block.Bytes); err != nil {
+				return nil, err
+			}
+			pubKey = _pubKey.(*rsa.PublicKey)
+		} else {
+			return nil, err
+		}
 	}
 
-	return pubKey.(*rsa.PublicKey), nil
+	return pubKey, nil
 }
