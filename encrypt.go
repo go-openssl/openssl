@@ -11,10 +11,13 @@ func (o *Openssl) Encrypt(data []byte, subLen ...int) ([]byte, error) {
 	if len(subLen) == 0 || subLen[0] <= 0 {
 		return rsa.EncryptPKCS1v15(rand.Reader, o.publicKey, data)
 	}
-	// 分段加密
 	str := string(data)
 	length := len(str)
 	sl := subLen[0]
+	if length <= sl {
+		return rsa.EncryptPKCS1v15(rand.Reader, o.publicKey, data)
+	}
+	// 分段加密
 	offset := 0
 	buffer := bytes.Buffer{}
 	for offset < length {
